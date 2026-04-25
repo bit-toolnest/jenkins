@@ -13,7 +13,7 @@ sudo apt update -y
 # 2) Install Java 21 (required for Jenkins 2.555.1+)
 if ! java -version 2>&1 | grep -q "21"; then
   echo "➡ Installing OpenJDK 21..."
-  sudo apt install -y openjdk-21-jre
+  sudo apt install -y openjdk-21-jdk
 else
   echo "✅ Java 21 already installed"
 fi
