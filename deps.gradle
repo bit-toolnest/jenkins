@@ -1,4 +1,4 @@
-ext.org = "bit-faas"   // your GitHub org
+ext.org = "bit-toolnest"   // your GitHub org
 
 //use real tool repo instead of toolA, toolB, toolC
 ext.deps = [
