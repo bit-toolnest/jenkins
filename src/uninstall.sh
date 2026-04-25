@@ -1,21 +1,32 @@
 #!/bin/bash
 set -e
 
-echo "=== Dummy Uninstaller Script ==="
-echo "This script should remove all components installed by install.sh."
+echo "=== Jenkins Uninstaller Script ==="
 
-# Example steps (replace with real commands):
-# 1. Stop services
-#    sudo systemctl stop tool.service
-#    sudo systemctl disable tool.service
+# 1) Stop Jenkins service
+echo "➡ Stopping Jenkins service..."
+sudo systemctl stop jenkins || true
+sudo systemctl disable jenkins || true
 
-# 2. Remove system packages
-#    sudo apt remove --purge -y <package>
+# 2) Remove Jenkins package
+echo "➡ Removing Jenkins package..."
+sudo apt remove --purge jenkins -y || true
 
-# 3. Clean environment variables
-#    sudo sed -i '/TOOL_HOME=/d' /etc/environment
+# 3) Remove Jenkins directories
+echo "➡ Cleaning Jenkins directories..."
+sudo rm -rf /var/lib/jenkins || true
+sudo rm -rf /etc/jenkins || true
+sudo rm -rf /var/log/jenkins || true
 
-# 4. Delete files and directories
-#    sudo rm -rf /opt/tool
+# 4) Remove Jenkins user if desired (optional)
+if id "jenkins" &>/dev/null; then
+  echo "➡ Removing Jenkins user..."
+  sudo deluser --remove-home jenkins || true
+fi
 
-echo "✅ Uninstallation complete (dummy run)"
+# 5) Final apt cleanup
+echo "➡ Running apt cleanup..."
+sudo apt autoremove -y
+sudo apt clean
+
+echo "🎯 Jenkins uninstall process finished!"
