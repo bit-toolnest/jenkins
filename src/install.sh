@@ -4,18 +4,18 @@ set -e
 echo "=== Jenkins Installer Script ==="
 
 # Adjust if newer LTS is required
-JENKINS_VERSION="2.555.1"
+JENKINS_VERSION="2.541.3"
 
 # 1) Update system
 echo "➡ Updating system packages..."
 sudo apt update -y
 
-# 2) Install Java 21 (required for Jenkins 2.555.1+)
-if ! java -version 2>&1 | grep -q "21"; then
-  echo "➡ Installing OpenJDK 21..."
-  sudo apt install -y openjdk-21-jdk
+# 2) Install Java 17 (required for Jenkins 2.541.3+)
+if ! java -version 2>&1 | grep -q "17"; then
+  echo "➡ Installing OpenJDK 17..."
+  sudo apt install -y openjdk-17-jdk
 else
-  echo "✅ Java 21 already installed"
+  echo "✅ Java 17 already installed"
 fi
 
 # 3) Download Jenkins LTS .deb package only if not installed or version mismatch
